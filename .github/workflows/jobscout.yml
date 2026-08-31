@@ -1,0 +1,94 @@
+name: JobScout digest
+
+on:
+  schedule:
+    # Mondays at 12:00 UTC (08:00 ET).
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+    inputs:
+      no_email:
+        description: "Build the digest but don't send it"
+        type: boolean
+        default: false
+
+concurrency:
+  group: jobscout-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # to commit the seen-roles ledger
+    defaults:
+      run:
+        working-directory: jobscout
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Use the example config if none is committed
+        run: |
+          [ -f config.yaml ] || cp config.example.yaml config.yaml
+          [ -f companies.yaml ] || cp companies.example.yaml companies.yaml
+
+      - name: Check whether the salary scrapers are enabled
+        id: scrapers
+        run: |
+          if grep -qE '^\s+enabled:\s*true' config.yaml; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Only paid for when the scrapers are actually turned on.
+      - name: Install Chromium for the salary scrapers
+        if: steps.scrapers.outputs.enabled == 'true'
+        run: |
+          uv pip install playwright
+          uv run playwright install --with-deps chromium
+
+      - name: Run the pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DIGEST_TO_EMAIL: ${{ secrets.DIGEST_TO_EMAIL }}
+          DIGEST_FROM_EMAIL: ${{ secrets.DIGEST_FROM_EMAIL }}
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
+        run: |
+          uv run jobscout run --verbose \
+            ${{ (github.event_name == 'workflow_dispatch' && inputs.no_email) && '--no-email' || '' }}
+
+      - name: Upload the digest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-${{ github.run_number }}
+          path: |
+            jobscout/digest.html
+            jobscout/digest.txt
+          retention-days: 90
+          if-no-files-found: warn
+
+      # The ledger is what stops next week's digest re-showing this week's roles.
+      - name: Commit the seen-roles ledger
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          if [ -n "$(git status --porcelain jobscout/state/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add jobscout/state/
+            git commit -m "chore: update seen-roles ledger [skip ci]"
+            git push
+          else
+            echo "ledger unchanged"
+          fi

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    paths: ["jobscout/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["jobscout/**", ".github/workflows/ci.yml"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: jobscout
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Lint
+        run: uv run ruff check src tests
+
+      - name: Test
+        run: uv run pytest -q
+
+      # Proves the whole pipeline works without credentials or network access,
+      # which is also what makes the tests above trustworthy.
+      - name: Offline end-to-end run
+        run: |
+          cp config.example.yaml config.yaml
+          cp companies.example.yaml companies.yaml
+          uv run jobscout run --offline --no-email
+
+      - name: Upload digest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest
+          path: |
+            jobscout/digest.html
+            jobscout/digest.txt
+          if-no-files-found: ignore

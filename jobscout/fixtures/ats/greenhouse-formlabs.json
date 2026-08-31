@@ -1,0 +1,24 @@
+{
+  "jobs": [
+    {
+      "id": 4501001,
+      "title": "Industrial Engineer",
+      "location": {
+        "name": "Somerville, MA"
+      },
+      "absolute_url": "https://boards.greenhouse.io/formlabs/jobs/4501001",
+      "updated_at": "2026-08-28T09:00:00Z",
+      "content": "&lt;p&gt;Own capacity planning. AutoCAD, simulation. The salary range for this position is $88,000 - $112,000 per year.&lt;/p&gt;"
+    },
+    {
+      "id": 4501055,
+      "title": "Manufacturing Process Engineer",
+      "location": {
+        "name": "Somerville, MA"
+      },
+      "absolute_url": "https://boards.greenhouse.io/formlabs/jobs/4501055",
+      "updated_at": "2026-08-30T09:00:00Z",
+      "content": "&lt;p&gt;Define and improve manufacturing processes for resin printers. Compensation: $90k to $115k annually.&lt;/p&gt;"
+    }
+  ]
+}
