@@ -1,0 +1,40 @@
+{
+  "page": 0,
+  "page_count": 1,
+  "results": [
+    {
+      "id": 77001,
+      "name": "Industrial Engineer",
+      "company": {
+        "name": "Formlabs"
+      },
+      "locations": [
+        {
+          "name": "Somerville, MA"
+        }
+      ],
+      "contents": "<p>Own capacity planning for production lines. AutoCAD required.</p>",
+      "publication_date": "2026-08-27T12:00:00Z",
+      "refs": {
+        "landing_page": "https://boards.greenhouse.io/formlabs/jobs/4501001"
+      }
+    },
+    {
+      "id": 77002,
+      "name": "Process Engineer",
+      "company": {
+        "name": "Vicor"
+      },
+      "locations": [
+        {
+          "name": "Andover, MA"
+        }
+      ],
+      "contents": "<p>Improve power module assembly throughput. Six Sigma preferred. Salary range $84,000 - $103,000.</p>",
+      "publication_date": "2026-08-24T12:00:00Z",
+      "refs": {
+        "landing_page": "https://jobs.lever.co/vicor/dddd4444-eeee-5555-ffff-666677778888"
+      }
+    }
+  ]
+}

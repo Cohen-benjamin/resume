@@ -1,0 +1,17 @@
+{
+  "totalFound": 1,
+  "content": [
+    {
+      "id": "744000123456",
+      "name": "Industrial Engineer II",
+      "location": {
+        "city": "Andover",
+        "region": "MA"
+      },
+      "releasedDate": "2026-08-29T09:00:00Z",
+      "ref": {
+        "jobAd": "https://jobs.smartrecruiters.com/RaytheonTechnologies/744000123456"
+      }
+    }
+  ]
+}

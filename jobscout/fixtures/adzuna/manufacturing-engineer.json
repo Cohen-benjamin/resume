@@ -1,0 +1,151 @@
+{
+  "count": 10,
+  "results": [
+    {
+      "id": "adz1000",
+      "title": "Industrial Engineer",
+      "company": {
+        "display_name": "Formlabs"
+      },
+      "location": {
+        "display_name": "Somerville, MA"
+      },
+      "description": "Formlabs is looking for an Industrial Engineer to own capacity planning for our Somerville production lines. You will build capacity models, identify bottlenecks, and redesign cell layouts. Requires AutoCAD, strong data analysis, and experience with discrete event simulation. The salary range for this position is $88,000 - $112,000 per year.",
+      "redirect_url": "https://boards.greenhouse.io/formlabs/jobs/4501001",
+      "created": "2026-08-28T09:00:00Z",
+      "salary_is_predicted": "0",
+      "salary_min": 88000,
+      "salary_max": 112000
+    },
+    {
+      "id": "adz1001",
+      "title": "Manufacturing Engineer",
+      "company": {
+        "display_name": "Markforged"
+      },
+      "location": {
+        "display_name": "Waltham, MA"
+      },
+      "description": "Own process development for additive manufacturing cells. You will define routings, drive continuous improvement, and work with quality on defect trend analysis. Experience with SAP and CAD required. Compensation: $95k to $120k annually.",
+      "redirect_url": "https://boards.greenhouse.io/markforged/jobs/4502002",
+      "created": "2026-08-25T09:00:00Z",
+      "salary_is_predicted": "0",
+      "salary_min": 95000,
+      "salary_max": 120000
+    },
+    {
+      "id": "adz1002",
+      "title": "Process Engineer",
+      "company": {
+        "display_name": "Desktop Metal"
+      },
+      "location": {
+        "display_name": "Burlington, MA"
+      },
+      "description": "Improve throughput across our metal printing lines. Lean/Six Sigma background preferred. You will run time studies, map value streams, and lead kaizen events.",
+      "redirect_url": "https://jobs.lever.co/desktopmetal/aaaa1111-bbbb-2222-cccc-333344445555",
+      "created": "2026-08-20T09:00:00Z",
+      "salary_is_predicted": "0"
+    },
+    {
+      "id": "adz1003",
+      "title": "Industrial Engineer II",
+      "company": {
+        "display_name": "Raytheon Technologies"
+      },
+      "location": {
+        "display_name": "Andover, MA"
+      },
+      "description": "Support factory capacity analysis and layout optimization for missile defense programs. Requires US citizenship and ability to obtain a security clearance. AutoCAD and Arena Simulation experience strongly preferred. Base salary $105,000.",
+      "redirect_url": "https://jobs.smartrecruiters.com/RaytheonTechnologies/744000123456",
+      "created": "2026-08-29T09:00:00Z",
+      "salary_is_predicted": "0"
+    },
+    {
+      "id": "adz1004",
+      "title": "Continuous Improvement Engineer",
+      "company": {
+        "display_name": "Takeda"
+      },
+      "location": {
+        "display_name": "Cambridge, MA"
+      },
+      "description": "Drive operational excellence across biologics manufacturing. Facilitate kaizen, build A3s, and coach teams on standard work. Pay range of $92,000-$118,000.",
+      "redirect_url": "https://external-takeda.icims.com/jobs/12345/job",
+      "created": "2026-08-23T09:00:00Z",
+      "salary_is_predicted": "0",
+      "salary_min": 92000,
+      "salary_max": 118000
+    },
+    {
+      "id": "adz1005",
+      "title": "Operations Engineer",
+      "company": {
+        "display_name": "Amazon Robotics"
+      },
+      "location": {
+        "display_name": "North Reading, MA"
+      },
+      "description": "Analyze fulfillment center throughput and design process improvements. SQL and data visualization required. This role pays $47.00 - $58.00 per hour.",
+      "redirect_url": "https://www.amazon.jobs/en/jobs/2891122/operations-engineer",
+      "created": "2026-08-16T09:00:00Z",
+      "salary_is_predicted": "1"
+    },
+    {
+      "id": "adz1006",
+      "title": "Senior Industrial Engineer",
+      "company": {
+        "display_name": "GE Aerospace"
+      },
+      "location": {
+        "display_name": "Lynn, MA"
+      },
+      "description": "Lead capacity and layout initiatives across the Lynn site. 8+ years required.",
+      "redirect_url": "https://jobs.gecareers.com/global/en/job/GE11GLOBAL/Senior-Industrial-Engineer",
+      "created": "2026-08-26T09:00:00Z",
+      "salary_is_predicted": "0"
+    },
+    {
+      "id": "adz1007",
+      "title": "Industrial Engineering Manager",
+      "company": {
+        "display_name": "Boston Scientific"
+      },
+      "location": {
+        "display_name": "Marlborough, MA"
+      },
+      "description": "Manage a team of five industrial engineers. 10+ years of experience required.",
+      "redirect_url": "https://bostonscientific.eightfold.ai/careers/job/123456",
+      "created": "2026-08-22T09:00:00Z",
+      "salary_is_predicted": "0"
+    },
+    {
+      "id": "adz1008",
+      "title": "Quality Engineer",
+      "company": {
+        "display_name": "Formlabs"
+      },
+      "location": {
+        "display_name": "Somerville, MA"
+      },
+      "description": "Own quality systems for production. CAPA, defect trending, and supplier quality. We offer a 401k match of $3,000 - $5,000 and comprehensive benefits.",
+      "redirect_url": "https://boards.greenhouse.io/formlabs/jobs/4501099",
+      "created": "2026-08-11T09:00:00Z",
+      "salary_is_predicted": "0"
+    },
+    {
+      "id": "adz1009",
+      "title": "Industrial Engineer",
+      "company": {
+        "display_name": "Stale Corp"
+      },
+      "location": {
+        "display_name": "Providence, RI"
+      },
+      "description": "This posting is old and should be filtered by max_age_days.",
+      "redirect_url": "https://example.com/old-job",
+      "created": "2026-07-07T09:00:00Z",
+      "salary_is_predicted": "0"
+    }
+  ]
+}

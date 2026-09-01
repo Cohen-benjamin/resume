@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ subject }}</title>
+</head>
+{#
+  Email clients strip <style> blocks and ignore most modern CSS, so everything
+  here is inline and table-free-but-simple. It has to render in Gmail, in Apple
+  Mail, and as a standalone file opened in a browser.
+#}
+<body style="margin:0;padding:0;background:#f4f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1c2430;">
+<div style="max-width:720px;margin:0 auto;padding:24px 16px;">
+
+  <div style="background:#2c3e50;border-radius:10px 10px 0 0;padding:24px 28px;">
+    <div style="color:#ffffff;font-size:22px;font-weight:600;">{{ headline }}</div>
+    <div style="color:#a8b6c4;font-size:14px;margin-top:6px;">
+      {{ generated_at.strftime('%A %d %B %Y') }} &middot;
+      {{ stats.verified_open }} verified open &middot;
+      {{ new_count }} new since last run
+    </div>
+  </div>
+
+  <div style="background:#ffffff;padding:20px 28px;border-bottom:1px solid #e6e9ed;">
+    <div style="font-size:14px;color:#54616e;line-height:1.6;">
+      Searched {{ stats.discovered }} postings, {{ stats.deduped }} unique after
+      deduplication. {{ stats.verified_open }} confirmed still open on the
+      employer's own site{% if stats.verified_closed %},
+      {{ stats.verified_closed }} already closed and dropped{% endif %}{% if stats.unverified %},
+      {{ stats.unverified }} could not be verified{% endif %}.
+    </div>
+  </div>
+
+  {% if top_jobs %}
+  <div style="background:#ffffff;padding:8px 28px 4px;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a96a3;padding:16px 0 4px;">
+      Top {{ top_jobs|length }} — with a plan for each
+    </div>
+  </div>
+
+  {% for job in top_jobs %}
+  <div style="background:#ffffff;padding:20px 28px;border-bottom:1px solid #eef1f4;">
+
+    <div style="font-size:17px;font-weight:600;line-height:1.35;">
+      <a href="{{ job.url }}" style="color:#1a5fb4;text-decoration:none;">{{ job.title }}</a>
+      {% if job.is_new %}<span style="display:inline-block;background:#e8f5e9;color:#1b5e20;font-size:10px;font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:3px;vertical-align:middle;margin-left:6px;">NEW</span>{% endif %}
+    </div>
+
+    <div style="font-size:14px;color:#54616e;margin-top:4px;">
+      {{ job.company }}{% if job.location %} &middot; {{ job.location }}{% endif %}{% if job.remote %} &middot; remote{% endif %}
+    </div>
+
+    <div style="margin-top:12px;font-size:13px;">
+      <span style="display:inline-block;background:{{ score_colour(job) }};color:#ffffff;font-weight:700;padding:3px 9px;border-radius:4px;">
+        {{ job.match.fit_score if job.match else '—' }}/100
+      </span>
+      <span style="display:inline-block;margin-left:10px;color:#2e7d32;font-weight:600;">
+        {{ salary_line(job) }}
+      </span>
+      {% if job.salary.best %}
+      <span style="color:#8a96a3;">({{ job.salary.best.source.value|replace('_',' ') }})</span>
+      {% endif %}
+    </div>
+
+    {% if job.match and job.match.verdict %}
+    <div style="margin-top:12px;font-size:14px;line-height:1.6;color:#28323d;">
+      {{ job.match.verdict }}
+    </div>
+    {% endif %}
+
+    {% if job.playbook %}
+    <div style="margin-top:14px;background:#f7f9fb;border-left:3px solid #1a5fb4;padding:14px 16px;border-radius:0 5px 5px 0;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#1a5fb4;">How to land it</div>
+
+      {% if job.playbook.angle %}
+      <div style="font-size:14px;line-height:1.6;margin-top:8px;">{{ job.playbook.angle }}</div>
+      {% endif %}
+
+      {% if job.playbook.lead_with %}
+      <div style="font-size:13px;margin-top:12px;"><strong style="color:#28323d;">Lead with</strong>
+        <ul style="margin:6px 0 0;padding-left:18px;line-height:1.6;color:#3c4854;">
+          {% for item in job.playbook.lead_with %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if job.playbook.close_gaps %}
+      <div style="font-size:13px;margin-top:10px;"><strong style="color:#28323d;">Close these gaps</strong>
+        <ul style="margin:6px 0 0;padding-left:18px;line-height:1.6;color:#3c4854;">
+          {% for item in job.playbook.close_gaps %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      {% if job.playbook.outreach %}
+      <div style="font-size:13px;margin-top:10px;line-height:1.6;color:#3c4854;">
+        <strong style="color:#28323d;">Outreach:</strong> {{ job.playbook.outreach }}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div style="margin-top:12px;font-size:12px;color:#8a96a3;">
+      Verified {{ job.verification.method }}{% if job.verification.detail %} — {{ job.verification.detail }}{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if rest_jobs %}
+  <div style="background:#ffffff;padding:20px 28px;border-bottom:1px solid #eef1f4;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a96a3;padding-bottom:10px;">
+      Also open ({{ rest_jobs|length }})
+    </div>
+    {% for job in rest_jobs %}
+    <div style="padding:9px 0;border-top:1px solid #f2f4f7;font-size:14px;">
+      <a href="{{ job.url }}" style="color:#1a5fb4;text-decoration:none;font-weight:500;">{{ job.title }}</a>
+      <span style="color:#8a96a3;"> — {{ job.company }}</span>
+      <span style="float:right;color:#54616e;font-size:13px;">
+        {{ job.match.fit_score if job.match else '—' }}{% if job.salary.best %} &middot; {{ job.salary.best.display() }}{% endif %}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if not top_jobs and not rest_jobs %}
+  <div style="background:#ffffff;padding:36px 28px;text-align:center;color:#54616e;font-size:15px;">
+    Nothing cleared the bar this run.
+    {% if stats.discovered %}
+    {{ stats.discovered }} postings were checked — try widening
+    <code style="background:#f2f4f7;padding:1px 4px;border-radius:3px;">search.roles</code> or
+    lowering <code style="background:#f2f4f7;padding:1px 4px;border-radius:3px;">filters.min_fit_score</code>.
+    {% else %}
+    No postings were returned at all, which usually means a source is misconfigured.
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if notes %}
+  <div style="background:#fffaf0;padding:16px 28px;border-top:1px solid #f0e2c8;">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#8a6d3b;">Worth knowing</div>
+    <ul style="margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:#7a6435;">
+      {% for note in notes %}<li>{{ note }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div style="background:#ffffff;border-radius:0 0 10px 10px;padding:18px 28px;font-size:12px;color:#8a96a3;line-height:1.6;">
+    Generated by JobScout for {{ profile.name or 'you' }}.
+    Salary figures are estimates from the source named on each role — verify before negotiating.
+  </div>
+
+</div>
+</body>
+</html>

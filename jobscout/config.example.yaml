@@ -1,0 +1,93 @@
+# JobScout configuration.
+#
+#   cp config.example.yaml config.yaml
+#
+# Every value below is a placeholder -- the EDIT markers are the ones that
+# actually decide what you get. Secrets do not live here; they come from the
+# environment (see .env.example).
+
+# Path to your resume, relative to this file. HTML, PDF, DOCX and plain text
+# all work. Defaults to the resume site at the root of this repo.
+resume_path: ../index.html
+
+search:
+  # EDIT: titles to search for. Include adjacent titles you would actually
+  # take, not only ones you have held -- this list is the top of the funnel and
+  # nothing outside it gets discovered.
+  roles:
+    - Industrial Engineer
+    - Manufacturing Engineer
+    - Process Engineer
+    - Continuous Improvement Engineer
+    - Operations Engineer
+
+  # EDIT: where to look. `radius_km` is the search radius around the named
+  # place. Add `remote: true` for a location-free search.
+  locations:
+    - name: Boston, MA
+      radius_km: 50
+    # - name: Andover, MA
+    #   radius_km: 30
+    # - name: Anywhere
+    #   remote: true
+
+  # EDIT: one of intern | entry | early | mid | senior | staff.
+  # Anchors both the salary percentile band and the fit rubric.
+  # Comment out to infer it from the resume instead.
+  seniority: early
+
+  # EDIT: free text, fed to the scoring rubric verbatim. This is where to put
+  # the preferences that don't fit a structured field -- industries you want or
+  # want to avoid, company size, culture, travel tolerance, growth direction.
+  intent: >
+    Looking to move from defense manufacturing into a role with broader
+    ownership of process improvement. Interested in aerospace, medical devices
+    and consumer manufacturing. Prefer mid-size companies over primes.
+    Willing to relocate within New England.
+
+  max_results_per_query: 50
+
+filters:
+  # Dropped before anything is scored, so these cost nothing to be generous with.
+  exclude_title_keywords:
+    - senior
+    - principal
+    - director
+    - manager
+    - staff
+  exclude_companies: []
+  # If set, a title must contain at least one of these to survive.
+  require_title_keywords: []
+  min_salary: null            # e.g. 85000
+  max_age_days: 30
+  # Roles Claude scores below this never reach the digest. 0 keeps everything.
+  min_fit_score: 55
+
+salary:
+  scrapers:
+    # Glassdoor and Levels.fyi. See the caveat in the README -- these are
+    # blocked some of the time by design on their end. Set false to disable;
+    # the other three salary sources carry on regardless.
+    enabled: true
+    delay_seconds: 7.0
+    max_consecutive_blocks: 3
+    cache_ttl_days: 30
+  bls_enabled: true
+  h1b_enabled: true
+  # EDIT: BLS metro area for wage lookups. Default is Boston-Cambridge-Nashua.
+  # Codes: https://www.bls.gov/oes/current/oessrcma.htm
+  bls_area_code: "0071650"
+  bls_area_name: "Boston-Cambridge-Nashua, MA-NH"
+
+report:
+  # How many roles get a written "how to land this" brief. Briefs are the
+  # expensive part of a run; everything else is still scored and listed.
+  top_n: 10
+  max_listed: 40
+  output_path: digest.html
+
+email:
+  enabled: true
+  # Leave blank to use DIGEST_TO_EMAIL from the environment.
+  to: ""
+  from_address: "JobScout <onboarding@resend.dev>"

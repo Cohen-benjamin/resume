@@ -1,0 +1,16 @@
+.venv/
+.jobscout/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Secrets.
+.env
+
+# Generated output.
+digest.html
+digest.txt
+
+# config.yaml and companies.yaml are NOT ignored: they hold no secrets, and the
+# scheduled workflow needs them committed to know what to search for.

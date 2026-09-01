@@ -1,0 +1,135 @@
+{
+  "_comment": "Bundled approximation of national OEWS annual wage percentiles, used only when the BLS API is unreachable, no metro series exists, or the run is offline. These figures are a starting point and are NOT authoritative -- refresh them from https://www.bls.gov/oes/current/oes_nat.htm and update 'year'. Metro data from the live API always wins over this table.",
+  "17-2112": {
+    "title": "Industrial Engineers",
+    "year": 2024,
+    "percentiles": {
+      "10": 66200,
+      "25": 80500,
+      "50": 99380,
+      "75": 122100,
+      "90": 146900
+    }
+  },
+  "17-2199": {
+    "title": "Engineers, All Other",
+    "year": 2024,
+    "percentiles": {
+      "10": 68300,
+      "25": 85100,
+      "50": 108500,
+      "75": 137400,
+      "90": 168200
+    }
+  },
+  "17-2141": {
+    "title": "Mechanical Engineers",
+    "year": 2024,
+    "percentiles": {
+      "10": 66100,
+      "25": 80900,
+      "50": 102320,
+      "75": 128900,
+      "90": 157900
+    }
+  },
+  "17-2071": {
+    "title": "Electrical Engineers",
+    "year": 2024,
+    "percentiles": {
+      "10": 70500,
+      "25": 87900,
+      "50": 111910,
+      "75": 140300,
+      "90": 172200
+    }
+  },
+  "17-2131": {
+    "title": "Materials Engineers",
+    "year": 2024,
+    "percentiles": {
+      "10": 65400,
+      "25": 80300,
+      "50": 104100,
+      "75": 130200,
+      "90": 161400
+    }
+  },
+  "13-1081": {
+    "title": "Logisticians",
+    "year": 2024,
+    "percentiles": {
+      "10": 48900,
+      "25": 62100,
+      "50": 79400,
+      "75": 101300,
+      "90": 127500
+    }
+  },
+  "13-1111": {
+    "title": "Management Analysts",
+    "year": 2024,
+    "percentiles": {
+      "10": 55100,
+      "25": 71300,
+      "50": 99410,
+      "75": 133800,
+      "90": 172900
+    }
+  },
+  "13-1199": {
+    "title": "Business Operations Specialists, All Other",
+    "year": 2024,
+    "percentiles": {
+      "10": 43200,
+      "25": 55800,
+      "50": 77500,
+      "75": 102400,
+      "90": 133100
+    }
+  },
+  "15-2031": {
+    "title": "Operations Research Analysts",
+    "year": 2024,
+    "percentiles": {
+      "10": 56000,
+      "25": 71800,
+      "50": 91290,
+      "75": 121400,
+      "90": 163700
+    }
+  },
+  "15-2051": {
+    "title": "Data Scientists",
+    "year": 2024,
+    "percentiles": {
+      "10": 63650,
+      "25": 84700,
+      "50": 112590,
+      "75": 149000,
+      "90": 194410
+    }
+  },
+  "11-3051": {
+    "title": "Industrial Production Managers",
+    "year": 2024,
+    "percentiles": {
+      "10": 72900,
+      "25": 95300,
+      "50": 125180,
+      "75": 160800,
+      "90": 200400
+    }
+  },
+  "17-2011": {
+    "title": "Aerospace Engineers",
+    "year": 2024,
+    "percentiles": {
+      "10": 78500,
+      "25": 100400,
+      "50": 130720,
+      "75": 163400,
+      "90": 197900
+    }
+  }
+}
