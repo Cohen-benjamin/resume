@@ -1,0 +1,42 @@
+# Employers whose job boards are polled directly on every run, in addition to
+# whatever the aggregators turn up.
+#
+#   cp companies.example.yaml companies.yaml
+#
+# This list is how you see roles at a company that never syndicates to a job
+# board. It is also what makes verification exact: these endpoints are the same
+# JSON the company's own careers page renders from.
+#
+# Finding the token: open the company's careers page and look at the URL its
+# listings load from.
+#
+#   greenhouse       boards.greenhouse.io/TOKEN            -> token: TOKEN
+#   lever            jobs.lever.co/TOKEN                   -> token: TOKEN
+#   ashby            jobs.ashbyhq.com/TOKEN                -> token: TOKEN
+#   smartrecruiters  careers.smartrecruiters.com/TOKEN     -> token: TOKEN
+#   workable         apply.workable.com/TOKEN              -> token: TOKEN
+#
+# `match_titles` is optional. On employers with thousands of openings it keeps
+# the poll to the part of the board you care about; omit it to take everything.
+
+companies:
+  # EDIT: replace these with the employers you are actually targeting.
+
+  - name: Formlabs
+    ats: greenhouse
+    token: formlabs
+    match_titles: [engineer, manufacturing, operations]
+
+  - name: Markforged
+    ats: greenhouse
+    token: markforged
+    match_titles: [engineer, manufacturing, operations]
+
+  - name: Desktop Metal
+    ats: lever
+    token: desktopmetal
+    match_titles: [engineer, manufacturing]
+
+  # - name: Some Employer
+  #   ats: ashby
+  #   token: someemployer
